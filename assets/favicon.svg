@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Mohan Raaj">
+  <rect width="32" height="32" fill="#F9FAFC"/>
+  <path
+    fill="none"
+    stroke="#2B3548"
+    stroke-width="3.25"
+    stroke-linecap="butt"
+    stroke-linejoin="miter"
+    d="M7.5 22.5V7.5L16 20.5L24.5 7.5V22.5"
+  />
+  <rect x="7" y="24" width="18" height="2.5" rx="1.25" fill="#4A8DB8"/>
+</svg>
