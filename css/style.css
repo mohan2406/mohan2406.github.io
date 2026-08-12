@@ -1,0 +1,674 @@
+/* ==========================================================================
+   1. CSS custom properties / design tokens
+   ========================================================================== */
+
+:root {
+  /* Colors — OKLCH palette */
+  --color-bg: oklch(0.992 0.008 235);
+  --color-surface-warm: oklch(0.975 0.014 82);
+  --color-surface-footer: oklch(0.30 0.045 245);
+  --color-text: oklch(0.28 0.04 250);
+  --color-text-secondary: oklch(0.48 0.03 250);
+  --color-text-muted: oklch(0.58 0.025 250);
+  --color-text-footer: oklch(0.94 0.015 90);
+  --color-accent: oklch(0.56 0.11 230);
+  --color-accent-strong: oklch(0.46 0.13 230);
+  --color-accent-subtle: oklch(0.93 0.04 230);
+  --color-accent-line: oklch(0.87 0.035 235);
+  --color-border: oklch(0.88 0.02 240);
+  --color-border-subtle: oklch(0.92 0.018 245);
+  --color-focus: oklch(0.42 0.14 230);
+  --color-skip-bg: oklch(0.24 0.05 250);
+  --color-skip-text: oklch(0.97 0.01 90);
+  --color-skip-border: oklch(0.42 0.04 245);
+
+  --color-heading: oklch(0.27 0.055 248);
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-sm: clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
+  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+  --text-brand: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --text-h2: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+  --text-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-hero: clamp(2.25rem, 1.6rem + 2.8vw, 3.75rem);
+  --line-height-body: 1.65;
+  --line-height-heading: 1.25;
+  --line-height-hero: 1.15;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: clamp(4rem, 3rem + 4vw, 6rem);
+  --space-10: clamp(5rem, 3.5rem + 5vw, 7rem);
+
+  /* Layout */
+  --content-max: 72rem;
+  --reading-max: 65ch;
+  --gutter: clamp(1.25rem, 0.75rem + 2vw, 2rem);
+  --touch-min: 2.75rem;
+}
+
+
+/* ==========================================================================
+   2. Reset / sensible defaults
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* ==========================================================================
+   3. Base typography and body styles
+   ========================================================================== */
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: var(--text-hero);
+  line-height: var(--line-height-hero);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--text-h2);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--text-h3);
+}
+
+h4 {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+p {
+  max-width: var(--reading-max);
+}
+
+p + p {
+  margin-block-start: var(--space-4);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+main {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+
+/* ==========================================================================
+   4. Global links and focus styles
+   ========================================================================== */
+
+a {
+  color: var(--color-accent-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+a:focus-visible {
+  border-radius: 2px;
+}
+
+
+/* ==========================================================================
+   5. Skip link
+   ========================================================================== */
+
+body > a[href="#main-content"] {
+  position: fixed;
+  inset-inline-start: var(--gutter);
+  inset-block-start: var(--space-2);
+  z-index: 100;
+  padding: var(--space-1) var(--space-2);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  background-color: var(--color-skip-bg);
+  color: var(--color-skip-text);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  border: 1px solid var(--color-skip-border);
+  border-radius: 3px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+body > a[href="#main-content"]:focus {
+  clip: auto;
+  clip-path: none;
+  overflow: visible;
+}
+
+
+/* ==========================================================================
+   6. Header and navigation
+   ========================================================================== */
+
+header {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+header > a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text);
+  font-size: var(--text-brand);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+header > a:hover {
+  color: var(--color-accent-strong);
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  max-inline-size: 100%;
+}
+
+nav a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--touch-min);
+  padding-inline: var(--space-1);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--color-accent-strong);
+  text-decoration: underline;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+html.js .menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: var(--touch-min);
+  padding-inline: var(--space-3);
+  padding-block: var(--space-2);
+  font-family: inherit;
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  color: var(--color-text-secondary);
+  background: none;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+html.js .menu-toggle:hover {
+  color: var(--color-accent-strong);
+  border-color: var(--color-accent-line);
+}
+
+html.js header {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+html.js #primary-navigation {
+  flex-basis: 100%;
+}
+
+html.js #primary-navigation[hidden] {
+  display: none;
+}
+
+html.js #primary-navigation ul {
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+}
+
+/* Selected nav state when a section is targeted */
+body:has(#about:target) nav a[href="#about"],
+body:has(#skills:target) nav a[href="#skills"],
+body:has(#projects:target) nav a[href="#projects"],
+body:has(#education:target) nav a[href="#education"],
+body:has(#contact:target) nav a[href="#contact"] {
+  color: var(--color-accent-strong);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+
+/* ==========================================================================
+   7. Hero
+   ========================================================================== */
+
+#hero {
+  padding-block: var(--space-10) var(--space-9);
+}
+
+#hero h1 {
+  max-width: 18ch;
+  padding-block-end: var(--space-4);
+}
+
+#hero h1::after {
+  content: "";
+  display: block;
+  inline-size: 3rem;
+  block-size: 3px;
+  margin-block-start: var(--space-4);
+  background-color: var(--color-accent);
+  border-radius: 2px;
+}
+
+#hero p:first-of-type {
+  margin-block-start: var(--space-5);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  max-width: var(--reading-max);
+}
+
+#hero p:last-of-type {
+  margin-block-start: var(--space-6);
+  color: var(--color-text);
+}
+
+
+/* ==========================================================================
+   8. Shared section styles
+   ========================================================================== */
+
+main > section {
+  padding-block: var(--space-8);
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+main > section:first-of-type {
+  border-block-start: none;
+}
+
+main > section > h2 {
+  margin-block-end: var(--space-6);
+  color: var(--color-heading);
+}
+
+
+/* ==========================================================================
+   9. Skills
+   ========================================================================== */
+
+#skills {
+  display: grid;
+  gap: var(--space-5);
+}
+
+#skills > h2 {
+  grid-column: 1 / -1;
+}
+
+#skills > section {
+  padding-block: var(--space-3);
+  padding-inline-start: var(--space-4);
+  border-inline-start: 2px solid var(--color-border);
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+#skills > section:first-of-type {
+  border-block-start: none;
+  padding-block-start: 0;
+}
+
+#skills > section > h3 {
+  margin-block-end: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent-strong);
+}
+
+#skills ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1);
+  line-height: 1.5;
+}
+
+#skills li {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}
+
+#skills li:not(:last-child)::after {
+  content: " ·";
+  color: var(--color-accent);
+  font-weight: var(--font-weight-normal);
+}
+
+
+/* ==========================================================================
+   10. Projects
+   ========================================================================== */
+
+#projects article {
+  padding-block: var(--space-7);
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+#projects article:first-of-type {
+  padding-block-start: 0;
+  border-block-start: none;
+}
+
+#projects article:last-of-type {
+  padding-block-end: 0;
+}
+
+#projects article h3 {
+  margin-block-end: var(--space-2);
+  color: var(--color-text);
+}
+
+#projects article h3 + p {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-block-end: var(--space-4);
+}
+
+#projects article p {
+  color: var(--color-text);
+}
+
+#projects article h4 {
+  margin-block-start: var(--space-5);
+  margin-block-end: var(--space-3);
+  color: var(--color-text);
+}
+
+#projects article h4 ~ p {
+  color: var(--color-text-secondary);
+}
+
+
+/* ==========================================================================
+   11. Education
+   ========================================================================== */
+
+#education article {
+  padding-block: var(--space-4);
+}
+
+#education article:first-of-type {
+  padding-block-start: 0;
+}
+
+#education article:last-of-type {
+  padding-block-end: 0;
+}
+
+#education article + article {
+  border-block-start: 1px solid var(--color-border-subtle);
+  margin-block-start: var(--space-2);
+}
+
+#education article h3 {
+  margin-block-end: var(--space-4);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+#education dl {
+  display: grid;
+  grid-template-columns: minmax(6rem, auto) 1fr;
+  gap: var(--space-2) var(--space-5);
+  max-width: var(--reading-max);
+}
+
+#education dt {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+#education dd {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   12. Contact
+   ========================================================================== */
+
+#contact ul {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-3);
+  max-width: var(--reading-max);
+  padding-inline-start: var(--space-4);
+  border-inline-start: 2px solid var(--color-accent-line);
+}
+
+#contact a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--touch-min);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-1);
+  color: var(--color-accent-strong);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+
+#contact a:hover {
+  color: var(--color-accent-strong);
+  text-decoration: underline;
+}
+
+#contact li:not(:last-child)::after {
+    content: " ·";
+    color: var(--color-accent);
+    font-weight: var(--font-weight-normal);
+}
+
+@media (max-width: 39.999rem) {
+  #contact ul {
+    gap: var(--space-2);
+  }
+
+  #contact a {
+    padding-block: var(--space-1);
+  }
+}
+
+
+/* ==========================================================================
+   13. Footer
+   ========================================================================== */
+
+footer {
+  background-color: var(--color-surface-footer);
+  padding-block: var(--space-5);
+  padding-inline: var(--gutter);
+}
+
+footer p {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  font-size: var(--text-sm);
+  color: var(--color-text-footer);
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   14. Responsive media queries
+   ========================================================================== */
+
+/* Tablet — horizontal header, two-column skills */
+@media (min-width: 40rem) {
+  header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-6);
+  }
+
+  html.js .menu-toggle {
+    display: none;
+  }
+
+  html.js header {
+    flex-wrap: nowrap;
+  }
+
+  html.js #primary-navigation {
+    flex-basis: auto;
+  }
+
+  html.js #primary-navigation ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    width: auto;
+  }
+
+  header > a {
+    min-block-size: var(--touch-min);
+  }
+
+  nav ul {
+    align-items: center;
+  }
+
+  #skills {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-7);
+    row-gap: var(--space-6);
+  }
+
+  #skills > section:nth-of-type(-n + 2) {
+    border-block-start: none;
+    padding-block-start: 0;
+  }
+
+  #skills > section:nth-of-type(n + 3) {
+    border-block-start: 1px solid var(--color-border-subtle);
+    padding-block-start: var(--space-5);
+  }
+
+  #contact ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1);
+  }
+}
+
+/* Desktop — generous spacing, optional four-column skills */
+@media (min-width: 64rem) {
+  #hero {
+    padding-block: var(--space-10) var(--space-9);
+  }
+
+  main > section {
+    padding-block: var(--space-9);
+  }
+
+  #projects article {
+    padding-block: var(--space-8);
+  }
+}
