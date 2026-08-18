@@ -481,6 +481,22 @@ main > section > h2 {
   color: var(--color-text-secondary);
 }
 
+#projects article h4 ~ a {
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--space-1);
+  color: var(--color-accent-strong);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+
+#projects article h4 ~ a:hover {
+  color: var(--color-accent-strong);
+  text-decoration: underline;
+}
+
+
+
 
 /* ==========================================================================
    11. Education
